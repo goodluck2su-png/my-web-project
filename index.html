@@ -1,1 +1,22 @@
-<h1>SU의 첫 번째 웹사이트에 오신 것을 환영합니다!</h1>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  // 1. 정보를 변수에 저장합니다.
+  const SUPABASE_URL = 'https://tmrlwvuioshsygdjljht.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRtcmx3dnVpb3Noc3lnZGpsamh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg2NjMwNTAsImV4cCI6MjA4NDIzOTA1MH0.xc9RFuO16NPVZW0HOd0w54hr4EQfbHSGU4saeSlWFg8';
+  
+  // 2. 이름을 'supabaseClient'로 바꿔서 라이브러리와 이름이 겹치지 않게 합니다.
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  // 3. GitHub 로그인을 실행하는 함수에서도 바뀐 이름을 사용합니다.
+  async function signInWithGitHub() {
+    const { data, error } = await supabaseClient.auth.signInWithOAuth({
+      provider: 'github',
+    });
+    
+    // 만약 에러가 발생하면 콘솔에 출력합니다.
+    if (error) console.error('로그인 에러:', error.message);
+  }
+</script>
+
+<button onclick="signInWithGitHub()">GitHub로 로그인하기</button>
